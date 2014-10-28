@@ -1,5 +1,6 @@
 # encoding: utf-8
 require 'csv'
+require 'json'
 
 #Parse files provided by the Q2A event logger plugin (see https://github.com/q2a/question2answer/tree/master/qa-plugin/event-logger)
 #Conf vars (event logger text file location)
@@ -133,6 +134,9 @@ end
 puts ""
 puts "Begin graph export"
 
+#JSON storage structures
+jsonedgearray = Array.new
+
 #Begin graph export
 CSV.open("logexport.csv", "w") do |csv|
 csv << ['source', 'target', 'weight']
@@ -143,17 +147,24 @@ csv << ['source', 'target', 'weight']
     user.connections.each_index do |connection|
       next if user.connections[connection] == nil
       csv << [user.userid, connection, user.connections[connection]]
+      #Shortcut: Adding also to JSON array (current user ID; target ID; connection weight)
+      edge = {'source' => user.userid, 'target' => connection, 'weight' => user.connections[connection]}
       #Debug
       puts user.userid.to_s + " -> " + connection.to_s + " str " + user.connections[connection].to_s
     end
   end
 end
 
-#Begin userlist export
+#Begin CSV userlist export
 CSV.open("userids.csv", "w") do |csv|
   csv << ['id', 'label']
   $uarray.each do |user|
     next unless user
     csv << [user.userid, user.username]
   end
+end
+
+#Begin JSON edge list export
+File.open("logexport.json","w") do |f|
+  f.write(jsonedgearray.to_json)
 end
