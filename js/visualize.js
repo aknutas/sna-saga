@@ -122,6 +122,7 @@ function drawNewStyleGraph(network, centralities) {
 	.attr("text-anchor", "middle")
 	.text(function(d) { return d.label; });
 
+	//Force layout
 	force.on("tick", function() {
 	    link.attr("x1", function(d) { return d.source.x; })
 	        .attr("y1", function(d) { return d.source.y; })
@@ -132,6 +133,32 @@ function drawNewStyleGraph(network, centralities) {
 			        return 'translate(' + [d.x, d.y] + ')'; 
 			    });
 	  });
+
+	//Fisheye effect
+	//Fisheye plugin
+	var fisheye = d3.fisheye.circular()
+    .radius(200)
+    .distortion(2);
+
+    svg.on("mousemove", function() {
+      fisheye.focus(d3.mouse(this));
+
+      gnodes.each(function(d) { d.fisheye = fisheye(d); });
+
+      gnodes.selectAll("circle")
+          .attr("cx", function(d) { return d.fisheye.x - d.x; })
+          .attr("cy", function(d) { return d.fisheye.y - d.y; })
+          .attr("r", function(d) { return d.fisheye.z * ((((d.rweight-minNodeWeight)/(maxNodeWeight-minNodeWeight))*nszDiff)+minNodeSize); });
+
+      gnodes.selectAll("text")
+          .attr("dx", function(d) { return d.fisheye.x - d.x; })
+          .attr("dy", function(d) { return d.fisheye.y - d.y; });
+          
+      link.attr("x1", function(d) { return d.source.fisheye.x; })
+          .attr("y1", function(d) { return d.source.fisheye.y; })
+          .attr("x2", function(d) { return d.target.fisheye.x; })
+          .attr("y2", function(d) { return d.target.fisheye.y; });
+    });
 }
 
 function goCalc(calcNet, centResults) {
