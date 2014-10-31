@@ -10,6 +10,7 @@ $(document).ready(function(){
 //Globs
 var Network = [];
 var centralityArray = [];
+var Communities = [];
 
 //Hardcoded conf values, bad (but it works)
 var minNodeSize = 5;
@@ -46,14 +47,14 @@ function loadReady(data) {
         var newNode = new Edge(value.source, value.target, value.weight);
         Network.push(newNode);
     });
-    //Calculate centralities
-	//Takes Network as a parameter and stores the results in centralityArray
-    goCalc(Network, centralityArray);
+    //Calculate centralities and communities
+	//Takes Network as a parameter and stores the results in centralityArray and Community array variables
+    goCalc(Network, centralityArray, Communities);
     //Draw graph based on network and centralityarray
     drawNewStyleGraph(Network, centralityArray);
 }
 
-function drawNewStyleGraph(network, centralities) {
+function drawNewStyleGraph(network, centralities, communities) {
 	var width = 1024,
 	height = 768;
 
@@ -167,7 +168,7 @@ function drawNewStyleGraph(network, centralities) {
     });
 }
 
-function goCalc(calcNet, centResults) {
+function goCalc(calcNet, centResults, communities) {
     //Calculate centrality and other measures, and store the results into an array
     var graphData = Viva.Graph.graph();
     
@@ -175,6 +176,12 @@ function goCalc(calcNet, centResults) {
         graphData.addLink(node.id, node.target);
     });
 
+    //Community detection calculation
+    communities = Viva.Graph.community().slpa(graphData, 200, 0.005);
+    console.log(communities);
+
+
+    //Centrality calculation
     var centrality = Viva.Graph.centrality();
     var betweenness = centrality.betweennessCentrality(graphData);
 
