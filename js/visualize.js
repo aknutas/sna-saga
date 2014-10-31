@@ -1,5 +1,11 @@
-//Listeners
-$(document).ready(onStart());
+//Onload, execute when page fully loaded
+$(document).ready(function(){
+	$( "#accordion" ).accordion({
+		collapsible: true,
+		active: false
+	});
+	onStart();
+});
 
 //Globs
 var Network = [];

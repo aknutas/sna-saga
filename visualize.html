@@ -5,15 +5,23 @@
 	<script type="text/javascript" src="js/d3.v3.min.js"></script>
     <script type="text/javascript" src="js/fisheye.js"></script>
     <script type="text/javascript" src="js/jquery-2.1.1.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.min.js"></script>
     <script type="text/javascript" src="js/visualize.js"></script>
     <link rel="stylesheet" type="text/css" href="css/styling.css"></link>
+    <link rel="stylesheet" type="text/css" href="css/jquery-ui.min.css"></link>
+    <link rel="stylesheet" type="text/css" href="css/jquery-ui.structure.min.css"></link>
+    <link rel="stylesheet" type="text/css" href="css/jquery-ui.theme.min.css"></link>
 </head>
 <html>
 <body>
     <div>
-        <strong>Node Table</strong> <br/>
-        <table id="tab"> <tr> <td><b>Node ID</b></td> <td><b> BW-Centrality </b></td> <td><b>Node ID</b></td> <td><b> BW-Centrality </b></td></tr></table>
+        <div id="accordion" class="accontainer">
+            <h3>Nodes listed by their betweeness centrality</h3>
+            <table id="tab"> <tr> <td><b>Node ID</b></td> <td><b> BW-Centrality </b></td> <td><b>Node ID</b></td> <td><b> BW-Centrality </b></td></tr></table>
+        </div>
     </div>
+    <br/>
+    <h2>Student Node Network</h3>
 	<br/>
 	<br/>
 </body>

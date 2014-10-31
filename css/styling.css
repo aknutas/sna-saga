@@ -6,11 +6,8 @@ td {
 	padding: 7px;
                         
 }                   
-body, svg, #graphContainer {
-	height: 120%;
-	width: 120%;
-	position: absolute;
-	margin: 0;
+.accontainer {
+	width: 85%;
 }
 .label {
 	position: absolute;
