@@ -60,11 +60,11 @@ function drawNewStyleGraph(network, centralities) {
 	var color = d3.scale.category20();
 
 	var force = d3.layout.force()
-	.charge(-500)
+	.charge(-800)
 	.linkDistance(100)
 	.size([width, height]);
 
-	var svg = d3.select("body").append("svg")
+	var svg = d3.select("#svggraph").append("svg")
 	.attr("width", width)
 	.attr("height", height);
 	
@@ -73,12 +73,11 @@ function drawNewStyleGraph(network, centralities) {
 	links = [];
 	
 	$.each(centralities, function(index, value){
-		//TODO: Adjustable filtering
 		//Checking to exclude from network
 		var toSkip = true;
 		network.forEach(function(link){
-			//TODO: Adjustable filtering
-			if((link.id === index || link.target === index) && link.weight > 1){
+			//TODO: Adjustable filtering by weight
+			if((link.id === index || link.target === index) && link.weight > 0.5){
 				toSkip = false;
 			}
 		});
@@ -92,11 +91,11 @@ function drawNewStyleGraph(network, centralities) {
 	});
 	
 	network.forEach(function(link){
-		//TODO: Adjustable filtering
-		if(indexednodes[link.id] != null && indexednodes[link.target] != null && link.weight > 1){
+		//TODO: Adjustable filtering by weight
+		if(indexednodes[link.id] != null && indexednodes[link.target] != null && link.weight > 0.5){
 			var s = indexednodes[link.id],
 			t = indexednodes[link.target];
-			links.push({source: s, target: t});
+			links.push({source: s, target: t, weight: link.weight});
 		}
 	});
 
@@ -105,11 +104,12 @@ function drawNewStyleGraph(network, centralities) {
 	.links(links)
 	.start();
 
+	//TODO: Adjust link filtering level
 	var link = svg.selectAll(".link")
 	.data(links)
 	.enter().append("line")
 	.attr("class", "link")
-	.style("stroke-width", function(d) { return Math.sqrt(d.value); });
+	.style("stroke-width", function(d) { if(d.weight > 1){return Math.sqrt(d.weight);}else{return 0;} });
 	
 	// Create the groups under svg
 	var gnodes = svg.selectAll('g.gnode')
