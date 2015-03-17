@@ -11,6 +11,9 @@ SAGA is an automated [social network analysis](http://en.wikipedia.org/wiki/Soci
 ### Motivation (i.e. why this thing exists)
 This tool allows near real-time analysis and visualization of online social environments. We propose that with automated methods an instructor can better evaluate the evolving social dynamics of an online classroom and intervene if necessary. In our design, we have two major approaches: The analysis of the social network using mathematical methods, which is based on existing research on SNA, and the design of an automated analysis and visualization tool. In this tool we combine both of these approaches into one fully automated workflow that downloads, processes and visualizes the SNA results.
 
+## Science!
+You can see our previous publications about learning and gamification at our [publication list](http://www.codecamp.fi/doku.php/wiki/educational_technologies_centre).
+
 ## Compatibility
 There is a data parser plugin available for the [Q2A](http://www.question2answer.org/) forum.
 
