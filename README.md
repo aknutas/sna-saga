@@ -26,4 +26,4 @@ The web app uses the Vivagraph.JS ([LICENSE](https://raw.githubusercontent.com/a
 ## Authors
 Project by Antti Knutas and Krzysztof Jankowski, from the [Software & Innovation](http://www.lut.fi/web/en/school-of-business-and-management/research/innovation-and-software) department of Lappeenranta University of Technology.
 
-If you link to us, please link to our [project page](http://aknutas.github.io/sna-saga/).
+If you link or refer to us, please link to our [project page](http://aknutas.github.io/sna-saga/).
