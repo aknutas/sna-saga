@@ -13,6 +13,7 @@ This tool allows near real-time analysis and visualization of online social envi
 
 ## Science!
 You can see our previous publications about learning and gamification at our [publication list](http://www.codecamp.fi/doku.php/wiki/educational_technologies_centre?&#dept_of_innovation_software).
+Also see the related publication in the [ACM Digital Library](http://dl.acm.org/citation.cfm?id=2812439).
 
 ## Compatibility
 There is a data parser plugin available for the [Q2A](http://www.question2answer.org/) forum.
